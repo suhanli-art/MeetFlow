@@ -1,0 +1,54 @@
+name: MeetFlow CI/CD Build and Sign
+
+# 當推送標籤 (例如 v1.0.0) 時自動觸發
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build:
+    name: Build and Package on Windows
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.13'
+
+    - name: Install Dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Run PyInstaller Build
+      run: python build.py
+
+    - name: Compile Inno Setup Installer
+      uses: minicomp/iscc-action@v1
+      with:
+        iss_file: MeetFlow_Installer.iss
+
+    # =========================================================
+    # SignPath 簽章步驟 (需先至官網申請免費 Open Source 帳號)
+    # 將註解解開，並在 GitHub 專案設定中填入對應的 Secrets 即可啟用
+    # =========================================================
+    # - name: Sign Installer with SignPath
+    #   uses: signpath/github-action-submit-signing-request@v1
+    #   with:
+    #     api-token: '${{ secrets.SIGNPATH_API_TOKEN }}'
+    #     organization-id: '${{ secrets.SIGNPATH_ORG_ID }}'
+    #     project-slug: 'meetflow'
+    #     signing-policy-slug: 'release-signing'
+    #     github-artifact-name: 'MeetFlow_Setup.exe'
+    #     wait-for-completion: true
+
+    - name: Upload Final Installer
+      uses: actions/upload-artifact@v4
+      with:
+        name: MeetFlow-Installer-Signed
+        path: Output/MeetFlow_Setup_v1.0.exe
