@@ -19,6 +19,11 @@ logs/
 Records/
 config.json
 
+# 錄影檔案
+*.mp4
+*.mkv
+*.avi
+
 # IDE 與編輯器
 .vscode/
 .idea/
