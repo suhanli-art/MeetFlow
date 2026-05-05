@@ -14,6 +14,7 @@ PyInstaller.__main__.run([
     '--name=MeetFlow',
     '--onedir',          # 打包為資料夾，啟動速度最快
     '--windowed',        # 隱藏終端機視窗
+    '--collect-all=imageio_ffmpeg', # 強制包入 ffmpeg.exe (解決打包後找不到 FFmpeg 的問題)
     '--hidden-import=imageio_ffmpeg',
     '--hidden-import=soundcard',
     '--hidden-import=soundfile',

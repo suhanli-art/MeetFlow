@@ -15,6 +15,7 @@ from core.audio_capture import AudioCaptureEngine
 from core.muxer import MuxerEngine
 from utils.config import load_config
 from utils.logger import logger
+from utils.paths import get_app_data_dir
 
 class AppWindow(ctk.CTk):
     def __init__(self):
@@ -55,10 +56,11 @@ class AppWindow(ctk.CTk):
         self.stop_event = threading.Event()
         self.threads = []
         
-        # 暫存檔強制使用 .mkv 以防止壞檔
-        self.temp_video = "temp_video.mkv"
-        self.temp_sys_audio = "temp_sys_audio.wav"
-        self.temp_mic_audio = "temp_mic_audio.wav"
+        # 暫存檔強制存放在 AppData 以防止權限錯誤
+        app_data = get_app_data_dir()
+        self.temp_video = os.path.join(app_data, "temp_video.mkv")
+        self.temp_sys_audio = os.path.join(app_data, "temp_sys_audio.wav")
+        self.temp_mic_audio = os.path.join(app_data, "temp_mic_audio.wav")
         
         self.setup_ui()
         
