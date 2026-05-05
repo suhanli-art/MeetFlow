@@ -6,7 +6,7 @@ current_dir = os.path.dirname(os.path.abspath(__file__))
 main_script = os.path.join(current_dir, "main.py")
 
 print("==================================================")
-print("  開始編譯 MeetFlow 商業版 (by RYAN LEE)")
+print("  Building MeetFlow Commercial Edition (by RYAN LEE)")
 print("==================================================")
 
 PyInstaller.__main__.run([
@@ -24,5 +24,5 @@ PyInstaller.__main__.run([
 ])
 
 print("\n==================================================")
-print("  編譯完成！執行檔位於 dist/MeetFlow/MeetFlow.exe")
+print("  Build completed! Executable is at dist/MeetFlow/MeetFlow.exe")
 print("==================================================")
