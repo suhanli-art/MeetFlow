@@ -29,9 +29,9 @@ jobs:
       run: python build.py
 
     - name: Compile Inno Setup Installer
-      uses: minicomp/iscc-action@v1
-      with:
-        iss_file: MeetFlow_Installer.iss
+      run: |
+        choco install innosetup
+        "C:\Program Files (x86)\Inno Setup 6\iscc.exe" MeetFlow_Installer.iss
 
     # =========================================================
     # SignPath 簽章步驟 (需先至官網申請免費 Open Source 帳號)
