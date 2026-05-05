@@ -19,7 +19,7 @@ from utils.logger import logger
 class AppWindow(ctk.CTk):
     def __init__(self):
         super().__init__()
-        self.title("MeetFlow - 商業完整版")
+        self.title("MeetFlow v1.0.3-beta")
         self.geometry("450x540")
         self.resizable(False, False)
         
@@ -106,8 +106,8 @@ class AppWindow(ctk.CTk):
         
         name_frame = ctk.CTkFrame(info_frame, fg_color="transparent")
         name_frame.pack(fill="x", padx=10, pady=(0, 10))
-        ctk.CTkLabel(name_frame, text="課程名稱:").pack(side="left")
-        self.filename_var = ctk.StringVar(value="Course_Record")
+        ctk.CTkLabel(name_frame, text="檔案名稱:").pack(side="left")
+        self.filename_var = ctk.StringVar(value="MeetFlow_Record")
         self.filename_entry = ctk.CTkEntry(name_frame, textvariable=self.filename_var)
         self.filename_entry.pack(side="right", fill="x", expand=True, padx=(10, 0))
         
