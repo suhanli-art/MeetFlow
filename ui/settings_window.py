@@ -95,7 +95,10 @@ class SettingsWindow(ctk.CTkToplevel):
         ctk.CTkButton(btn_frame, text="取消", fg_color="gray", command=self.destroy).pack(side="left", padx=10)
 
     def browse_folder(self):
+        # 必須透過 after() 在主執行緒開啟檔案視窗，否則會導致 CTkToplevel 當機
+        self.grab_release()
         folder = filedialog.askdirectory(parent=self, title="選擇錄影儲存資料夾")
+        self.grab_set()
         if folder:
             self.path_var.set(folder)
             

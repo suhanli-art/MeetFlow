@@ -4,8 +4,6 @@
 
 import mss
 import subprocess
-import mss
-import subprocess
 import time
 import imageio_ffmpeg
 from utils.logger import logger
@@ -23,7 +21,7 @@ class VideoCaptureEngine:
         使用 mss 抓取指定區域，並透過 Frame Duplication 演算法保證恆定幀率 (CFR)。
         """
         try:
-            with mss.MSS() as sct:
+            with mss.mss() as sct:
                 # 若未指定區域，則預設為主螢幕
                 if not capture_region:
                     monitor = sct.monitors[1]
